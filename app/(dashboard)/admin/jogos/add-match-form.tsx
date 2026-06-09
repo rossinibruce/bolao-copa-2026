@@ -18,7 +18,8 @@ import type { Team, Stadium } from '@/lib/types'
 
 const STAGES = [
   { value: 'group_stage', label: 'Fase de Grupos' },
-  { value: 'round_of_32', label: 'Oitavas de Final' },
+  { value: 'round_of_32', label: 'Dezesseis-avos de final' },
+  { value: 'round_of_16', label: 'Oitavas de Final' },
   { value: 'quarter_finals', label: 'Quartas de Final' },
   { value: 'semi_finals', label: 'Semifinais' },
   { value: 'third_place', label: 'Disputa 3º Lugar' },

@@ -21,7 +21,7 @@ interface MatchCardProps {
 
 const stageLabels: Record<string, string> = {
   group_stage: 'Fase de Grupos',
-  round_of_32: 'Rodada de 32',
+  round_of_32: 'Dezesseis-avos de final',
   round_of_16: 'Oitavas de Final',
   quarter_finals: 'Quartas de Final',
   semi_finals: 'Semifinais',

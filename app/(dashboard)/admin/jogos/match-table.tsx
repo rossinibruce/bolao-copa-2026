@@ -21,7 +21,7 @@ import type { MatchWithTeams } from '@/lib/types'
 
 const STAGE_LABELS: Record<string, string> = {
   group_stage: 'Fase de Grupos',
-  round_of_32: 'Oitavas de Final',
+  round_of_32: 'Dezesseis-avos de final',
   round_of_16: 'Oitavas de Final',
   quarter_finals: 'Quartas de Final',
   semi_finals: 'Semifinais',
