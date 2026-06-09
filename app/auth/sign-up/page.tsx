@@ -42,16 +42,13 @@ export default function SignUpPage() {
         email,
         password,
         options: {
-          emailRedirectTo:
-            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ??
-            `${window.location.origin}/auth/callback`,
           data: {
-            name: name,
+            name,
           },
         },
       })
       if (error) throw error
-      router.push('/auth/sign-up-success')
+      router.push('/auth/login')
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'Ocorreu um erro ao criar a conta')
     } finally {
