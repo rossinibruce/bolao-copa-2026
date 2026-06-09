@@ -29,7 +29,7 @@ const countryEmojis: Record<string, string> = {
 
   // Grupo D
   AUS: '🇦🇺',
-  EUA: '🇺🇸',
+  USA: '🇺🇸',
   PAR: '🇵🇾',
   TUR: '🇹🇷',
 
