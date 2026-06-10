@@ -25,7 +25,7 @@ const countryEmojis: Record<string, string> = {
   BRA: '🇧🇷',
   ESC: '🇬🇧',
   HAI: '🇭🇹',
-  MAR: '🇲🇷',
+  MAR: '🇲🇦',
 
   // Grupo D
   AUS: '🇦🇺',
