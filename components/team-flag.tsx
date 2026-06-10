@@ -47,7 +47,7 @@ const countryEmojis: Record<string, string> = {
 
   // Grupo G
   BEL: '🇧🇪',
-  EGI: '🇪🇬',
+  EGY: '🇪🇬',
   IRN: '🇮🇷',
   NZL: '🇳🇿',
 
@@ -64,7 +64,7 @@ const countryEmojis: Record<string, string> = {
   SEN: '🇸🇳',
 
   // Grupo J
-  AGL: '🇦🇬',
+  AGL: '🇩🇿',
   ARG: '🇦🇷',
   AUT: '🇦🇹',
   JOR: '🇯🇴',
