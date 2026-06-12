@@ -125,22 +125,8 @@ export default async function DashboardPage() {
                 <TrendingUp className="h-6 w-6 text-accent" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total de Pontos</p>
+                <p className="text-sm text-muted-foreground">Meus Pontos</p>
                 <p className="text-2xl font-bold">{userRanking?.total_points || 0}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500/10">
-                <Target className="h-6 w-6 text-yellow-500" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Placares Exatos</p>
-                <p className="text-2xl font-bold">{userRanking?.exact_scores || 0}</p>
               </div>
             </div>
           </CardContent>
@@ -153,7 +139,7 @@ export default async function DashboardPage() {
                 <Calendar className="h-6 w-6 text-blue-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Suas Apostas</p>
+                <p className="text-sm text-muted-foreground">Apostas / Jogos</p>
                 <p className="text-2xl font-bold">
                   {userBetsCount || 0} / {totalMatches || 0}
                 </p>

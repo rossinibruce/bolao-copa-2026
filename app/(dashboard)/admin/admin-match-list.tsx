@@ -93,39 +93,65 @@ export function AdminMatchList({ matches }: AdminMatchListProps) {
 
         // Calculate points for each bet
         if (bets) {
+          const affectedUsers = new Set<string>()
+        
+          // 1 - Atualiza todas as apostas
           for (const bet of bets) {
             const result = ScoreCalculatorService.calculate(
-              { predicted_home_score: bet.predicted_home_score, predicted_away_score: bet.predicted_away_score },
-              { home_score: homeScore, away_score: awayScore }
+              {
+                predicted_home_score: bet.predicted_home_score,
+                predicted_away_score: bet.predicted_away_score
+              },
+              {
+                home_score: homeScore,
+                away_score: awayScore
+              }
             )
-
-            // Update bet with points
-            await supabase
+        
+            const { error: betError } = await supabase
               .from('bets')
-              .update({ points: result.points })
+              .update({
+                points: result.points
+              })
               .eq('id', bet.id)
-
-            // Update user ranking
-            const { data: userBets } = await supabase
+        
+            if (betError) {
+              console.error('Erro atualizando bet', bet.id, betError)
+              continue
+            }
+        
+            affectedUsers.add(bet.user_id)
+          }
+        
+          // 2 - Recalcula ranking dos usuários afetados
+          for (const userId of affectedUsers) {
+            const { data: userBets, error: userBetsError } = await supabase
               .from('bets')
               .select('points')
-              .eq('user_id', bet.user_id)
+              .eq('user_id', userId)
               .not('points', 'is', null)
-
-            if (userBets) {
-              const stats = ScoreCalculatorService.calculateStats(userBets)
-              
-              await supabase
-                .from('rankings')
-                .upsert({
-                  user_id: bet.user_id,
-                  total_points: stats.total_points,
-                  exact_scores: stats.exact_scores,
-                  correct_winners: stats.correct_winners,
-                  partial_scores: stats.partial_scores,
-                  total_bets: stats.total_bets,
-                  updated_at: new Date().toISOString(),
-                }, { onConflict: 'user_id' })
+        
+            if (userBetsError) {
+              console.error('Erro buscando bets do usuário', userId, userBetsError)
+              continue
+            }
+        
+            const stats = ScoreCalculatorService.calculateStats(userBets || [])
+        
+            const { error: rankingError } = await supabase
+              .from('rankings')
+              .update({
+                total_points: stats.total_points,
+                exact_scores: stats.exact_scores,
+                correct_winners: stats.correct_winners,
+                partial_scores: stats.partial_scores,
+                total_bets: stats.total_bets,
+                updated_at: new Date().toISOString(),
+              })
+              .eq('user_id', userId)
+        
+            if (rankingError) {
+              console.error('Erro ranking', userId, rankingError)
             }
           }
         }

@@ -17,14 +17,22 @@ export default async function RankingPage() {
     .select('*, profile:profiles(*)')
     .order('total_points', { ascending: false })
 
-  // Calculate global stats
-  const totalParticipants = rankings?.length || 0
-  const totalPoints = rankings?.reduce((sum, r) => sum + r.total_points, 0) || 0
-  const totalExactScores = rankings?.reduce((sum, r) => sum + r.exact_scores, 0) || 0
-  const totalBets = rankings?.reduce((sum, r) => sum + r.total_bets, 0) || 0
+// Calculate stats
+const totalParticipants = rankings?.length || 0
 
-  // Get user's position
-  const userPosition = rankings?.findIndex(r => r.user_id === user?.id) ?? -1
+// Dados do usuário logado
+const currentUserRanking = rankings?.find(
+  r => r.user_id === user?.id
+)
+
+const userPoints = currentUserRanking?.total_points || 0
+const userExactScores = currentUserRanking?.exact_scores || 0
+const userTotalBets = currentUserRanking?.total_bets || 0
+
+// Get user's position
+const userPosition = rankings?.findIndex(
+  r => r.user_id === user?.id
+) ?? -1
 
   return (
     <div className="space-y-6">
@@ -43,42 +51,6 @@ export default async function RankingPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardContent className="p-4 flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Users className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Participantes</p>
-              <p className="text-2xl font-bold">{totalParticipants}</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4 flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
-              <TrendingUp className="h-6 w-6 text-accent" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Total de Pontos</p>
-              <p className="text-2xl font-bold">{totalPoints}</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4 flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500/10">
-              <Target className="h-6 w-6 text-yellow-500" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Placares Exatos</p>
-              <p className="text-2xl font-bold">{totalExactScores}</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4 flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
               <Trophy className="h-6 w-6 text-blue-500" />
             </div>
@@ -87,6 +59,18 @@ export default async function RankingPage() {
               <p className="text-2xl font-bold">
                 {userPosition >= 0 ? `${userPosition + 1}º` : '-'}
               </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Users className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Participantes</p>
+              <p className="text-2xl font-bold">{totalParticipants}</p>
             </div>
           </CardContent>
         </Card>

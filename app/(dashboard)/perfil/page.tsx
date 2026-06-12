@@ -160,11 +160,6 @@ export default function PerfilPage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-primary/10 p-4 text-center">
-                <p className="text-3xl font-bold text-primary">{ranking?.total_points || 0}</p>
-                <p className="text-sm text-muted-foreground">Total de Pontos</p>
-              </div>
-
               <div className="rounded-lg bg-accent/10 p-4 text-center">
                 <p className="text-3xl font-bold text-accent">{ranking?.total_bets || 0}</p>
                 <p className="text-sm text-muted-foreground">Total de Apostas</p>
@@ -178,6 +173,14 @@ export default function PerfilPage() {
                 <p className="text-sm text-muted-foreground">Placares Exatos</p>
               </div>
 
+              <div className="rounded-lg bg-blue-500/10 p-4 text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <Circle className="h-5 w-5 text-blue-500" />
+                  <p className="text-3xl font-bold text-blue-500">{ranking?.partial_scores || 0}</p>
+                </div>
+                <p className="text-sm text-muted-foreground">Acertos Parciais</p>
+              </div>
+              
               <div className="rounded-lg bg-green-500/10 p-4 text-center">
                 <div className="flex items-center justify-center gap-2">
                   <CheckCircle className="h-5 w-5 text-green-500" />
@@ -186,12 +189,11 @@ export default function PerfilPage() {
                 <p className="text-sm text-muted-foreground">Vencedores Certos</p>
               </div>
 
-              <div className="rounded-lg bg-blue-500/10 p-4 text-center col-span-2">
+              <div className="rounded-lg bg-primary/10 p-4 text-center col-span-2">
                 <div className="flex items-center justify-center gap-2">
-                  <Circle className="h-5 w-5 text-blue-500" />
-                  <p className="text-2xl font-bold text-blue-500">{ranking?.partial_scores || 0}</p>
+                  <p className="text-2xl font-bold text-primary">{ranking?.total_points || 0}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">Acertos Parciais</p>
+                <p className="text-sm text-muted-foreground">Total de Pontos</p>
               </div>
             </div>
           </CardContent>
