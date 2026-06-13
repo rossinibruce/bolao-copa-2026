@@ -174,23 +174,11 @@ export function BetCard({ match }: Props) {
                         size="sm"
                         />
 
-                        {match.status === 'finished' && (
-                        <Badge>
-                            {bet.points ?? 0} pts
-                        </Badge>
-                        )}
-
                     </div>
 
                 </div>
 
                 <div className="flex items-center gap-4">
-
-                  <span className="font-bold">
-                    {bet.predicted_home_score}
-                    {' x '}
-                    {bet.predicted_away_score}
-                  </span>
 
                   {match.status === 'finished' && (
                     <Badge>
