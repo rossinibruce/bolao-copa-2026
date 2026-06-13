@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Trophy, Menu, User, LogOut, Settings, BarChart3, Calendar, Home, Shield } from 'lucide-react'
+import { Trophy, Menu, User, LogOut, Settings, BarChart3, Calendar, Target, Home, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -19,6 +19,7 @@ import type { Profile } from '@/lib/types'
 const navItems = [
   { href: '/dashboard', label: 'Início', icon: Home },
   { href: '/jogos', label: 'Jogos', icon: Calendar },
+  { href: '/palpites', label: 'Palpites', icon: Target },
   { href: '/ranking', label: 'Ranking', icon: BarChart3 },
 ]
 
