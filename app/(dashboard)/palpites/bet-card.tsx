@@ -32,58 +32,53 @@ export function BetCard({ match }: Props) {
       <AccordionItem value={match.id}>
 
         <AccordionTrigger>
+            <div className="w-full">
 
-            <div className="flex items-center justify-between w-full pr-4">
+                <div className="flex items-center justify-center gap-8">
 
-                <div className="flex flex-col gap-2">
+                    <div className="flex flex-col items-center">
+                    <TeamFlag
+                        code={match.home_team.code}
+                        name={match.home_team.name}
+                        size="md"
+                    />
 
-                    <div className="flex items-center gap-4">
-
-                    <div className="flex items-center gap-2">
-                        <TeamFlag
-                            code={match.home_team.code}
-                            name={match.home_team.name}
-                            size="sm"
-                        />
-
-                        <span className="font-semibold">
+                    <span className="text-xs text-muted-foreground mt-1">
                         {match.home_team.name}
-                        </span>
+                    </span>
                     </div>
 
-                    {match.status !== 'scheduled' ? (
-                        <span className="font-bold text-lg">
+                    <div className="flex flex-col items-center min-w-[80px]">
+
+                    {match.status === 'scheduled' ? (
+                        <span className="text-xl font-bold">
+                        x
+                        </span>
+                    ) : (
+                        <span className="text-xl font-bold">
                         {match.home_score ?? 0}
                         {' x '}
                         {match.away_score ?? 0}
                         </span>
-                    ) : (
-                        <span className="text-muted-foreground font-medium">
-                        x
-                        </span>
                     )}
 
-                    <div className="flex items-center gap-2">
-                        <TeamFlag
-                            code={match.away_team.code}
-                            name={match.away_team.name}
-                            size="sm"
-                        />
+                    </div>
 
-                        <span className="font-semibold">
+                    <div className="flex flex-col items-center">
+                    <TeamFlag
+                        code={match.away_team.code}
+                        name={match.away_team.name}
+                        size="md"
+                    />
+
+                    <span className="text-xs text-muted-foreground mt-1">
                         {match.away_team.name}
-                        </span>
-                    </div>
-
-                    </div>
-
-                    <span className="text-xs text-muted-foreground text-left">
-                        {new Date(match.match_date).toLocaleString('pt-BR')}
                     </span>
+                    </div>
 
                 </div>
 
-                <div>
+                <div className="flex justify-center mt-4">
 
                     {match.status === 'live' && (
                     <Badge className="bg-green-600 animate-pulse">
