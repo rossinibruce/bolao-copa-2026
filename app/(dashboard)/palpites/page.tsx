@@ -20,7 +20,7 @@ export default async function PalpitesPage() {
         )
       )
     `)
-    .order('match_date', { ascending: true })
+    .order('match_number', { ascending: false })
 
   const liveMatches =
     matches?.filter(m => m.status === 'live') || []
