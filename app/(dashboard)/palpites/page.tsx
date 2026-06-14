@@ -58,10 +58,6 @@ export default async function PalpitesPage() {
             Finalizados ({finishedMatches.length})
           </TabsTrigger>
 
-          <TabsTrigger value="scheduled">
-            Agendados ({scheduledMatches.length})
-          </TabsTrigger>
-
         </TabsList>
 
         <TabsContent value="live">
