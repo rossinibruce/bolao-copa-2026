@@ -117,10 +117,6 @@ export function RankingCard({ ranking, position, isCurrentUser = false }: Rankin
             </div>
             <p className="text-xs text-muted-foreground">Parciais</p>
           </div>
-          <div className="rounded-lg bg-background/50 p-2">
-            <span className="text-sm font-semibold">{ranking.total_bets}</span>
-            <p className="text-xs text-muted-foreground">Apostas</p>
-          </div>
         </div>
       </CardContent>
     </Card>
