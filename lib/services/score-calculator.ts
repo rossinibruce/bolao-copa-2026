@@ -94,7 +94,9 @@ export class ScoreCalculatorService {
   /**
    * Calcula estatísticas do usuário com base em todas as apostas
    */
-  static calculateStats(bets: { points: number }[]): {
+  static calculateStats(
+    bets: { points: number | null }[]
+  ): {
     total_points: number
     exact_scores: number
     correct_winners: number
@@ -103,7 +105,7 @@ export class ScoreCalculatorService {
   } {
     return bets.reduce(
       (acc, bet) => {
-        acc.total_points += bet.points
+        acc.total_points += bet.points ?? 0
         acc.total_bets += 1
         
         if (bet.points === 4) acc.exact_scores += 1

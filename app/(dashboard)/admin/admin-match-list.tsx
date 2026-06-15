@@ -127,9 +127,14 @@ export function AdminMatchList({ matches }: AdminMatchListProps) {
           for (const userId of affectedUsers) {
             const { data: userBets, error: userBetsError } = await supabase
               .from('bets')
-              .select('points')
+              .select(`
+                points,
+                matches!inner(
+                  status
+                )
+              `)
               .eq('user_id', userId)
-              .not('points', 'is', null)
+              .eq('matches.status', 'finished')
         
             if (userBetsError) {
               console.error('Erro buscando bets do usuário', userId, userBetsError)
