@@ -30,8 +30,11 @@ export default async function DashboardPage() {
   // Get user's position in ranking
   const { data: allRankings } = await supabase
     .from('rankings')
-    .select('user_id, total_points')
+    .select('user_id, total_points, exact_scores, correct_winners, partial_scores') 
     .order('total_points', { ascending: false })
+    .order('exact_scores', { ascending: false })
+    .order('correct_winners', { ascending: false })
+    .order('partial_scores', { ascending: false })
 
   const userPosition = allRankings?.findIndex(r => r.user_id === user?.id) ?? -1
 
@@ -63,6 +66,9 @@ export default async function DashboardPage() {
     .from('rankings')
     .select('*, profile:profiles(*)')
     .order('total_points', { ascending: false })
+    .order('exact_scores', { ascending: false })
+    .order('correct_winners', { ascending: false })
+    .order('partial_scores', { ascending: false })
     .limit(5)
 
   // Get stats
