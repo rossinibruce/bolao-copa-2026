@@ -16,6 +16,9 @@ export default async function RankingPage() {
     .from('rankings')
     .select('*, profile:profiles(*)')
     .order('total_points', { ascending: false })
+    .order('exact_scores', { ascending: false })
+    .order('correct_winners', { ascending: false })
+    .order('partial_scores', { ascending: false })
 
 // Calculate stats
 const totalParticipants = rankings?.length || 0
