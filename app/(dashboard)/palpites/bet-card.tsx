@@ -225,11 +225,11 @@ export function BetCard({ match }: Props) {
 
               <div
                 key={bet.id}
-                className="flex items-center justify-between border rounded-md px-4 py-2"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between border rounded-md px-3 py-3 sm:px-4 sm:py-2 gap-2"
               >
 
-                {/* Lado esquerdo: Nome + Medalha */}
-                <div className="flex items-center gap-3 min-w-[120px]">
+                {/* Linha superior: Nome + Medalha (mobile) */}
+                <div className="flex items-center gap-3 w-full sm:w-auto sm:min-w-[120px]">
 
                   {match.status === 'finished' && index === 0 && (
                     <span className="text-lg">🥇</span>
@@ -243,42 +243,45 @@ export function BetCard({ match }: Props) {
                     <span className="text-lg">🥉</span>
                   )}
 
-                  <span className="font-medium truncate">
+                  <span className="font-medium truncate flex-1">
                     {bet.profile?.name ?? 'Usuário'}
                   </span>
 
                 </div>
 
-                {/* Centro: Palpite com bandeiras */}
-                <div className="flex items-center gap-3 flex-1 justify-center">
+                {/* Linha inferior ou lado: Palpite com bandeiras + Pontos */}
+                <div className="flex items-center justify-between w-full sm:w-auto gap-2">
 
-                  <TeamFlag
-                    code={match.home_team.code}
-                    name={match.home_team.name}
-                    size="sm"
-                  />
+                  {/* Palpite centralizado */}
+                  <div className="flex items-center gap-2 sm:gap-3 flex-1 sm:flex-none justify-center sm:justify-center">
 
-                  <div className="flex items-center gap-2 font-bold">
-                    <span className="w-6 text-center">
-                      {bet.predicted_home_score}
-                    </span>
-                    <span className="text-muted-foreground">x</span>
-                    <span className="w-6 text-center">
-                      {bet.predicted_away_score}
-                    </span>
+                    <TeamFlag
+                      code={match.home_team.code}
+                      name={match.home_team.name}
+                      size="sm"
+                      className="hidden sm:block"
+                    />
+
+                    <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-sm sm:text-base">
+                      <span className="w-5 sm:w-6 text-center">
+                        {bet.predicted_home_score}
+                      </span>
+                      <span className="text-muted-foreground text-xs sm:text-sm">x</span>
+                      <span className="w-5 sm:w-6 text-center">
+                        {bet.predicted_away_score}
+                      </span>
+                    </div>
+
+                    <TeamFlag
+                      code={match.away_team.code}
+                      name={match.away_team.name}
+                      size="sm"
+                      className="hidden sm:block"
+                    />
+
                   </div>
 
-                  <TeamFlag
-                    code={match.away_team.code}
-                    name={match.away_team.name}
-                    size="sm"
-                  />
-
-                </div>
-
-                {/* Lado direito: Pontos */}
-                <div className="min-w-[80px] text-right">
-
+                  {/* Pontos - sempre visível */}
                   {match.status === 'finished' && (
                     <Badge>
                       {bet.points ?? 0} pts
